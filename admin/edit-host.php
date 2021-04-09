@@ -13,7 +13,7 @@
         $hostname=$_POST["hostname"];
         $ip=$_POST["ip"];
         $user=$_POST["user"];
-        $password=md5($_POST["password"]);
+        $password=$_POST["password"];
         $account_id=$_SESSION['pobdns_auth_userid'];
         
         if (isset($_POST['password']))
@@ -77,6 +77,10 @@
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
 	<script src="./js/bootstrap.bundle.min.js"></script>
 	<script>
+        $(document).ready(function(){
+            $('#password').val('');
+        });
+	
         function confirmDel()
         {
             var r = confirm("Delete this host?");
@@ -116,7 +120,7 @@
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="<?php echo $password ?>">
+    <input type="password" class="form-control" id="password" name="password" placeholder="Edit Password" value="">
   </div>
   
   <button type="submit" class="btn btn-primary" name="save_btn" id="save_btn" >Save</button>

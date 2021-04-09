@@ -11,7 +11,7 @@
     {
         $hostname=$_POST["hostname"];
         $user=$_POST["user"];
-        $password=md5($_POST["password"]);
+        $password=$_POST["password"];
         $account_id=$_SESSION['pobdns_auth_userid'];
         
         $sql="Insert into hosts (hostname,user,password,account_id) values

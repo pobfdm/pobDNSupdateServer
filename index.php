@@ -1,18 +1,31 @@
 <?php
-$user=$_SERVER['PHP_AUTH_USER'];
-$password=md5($_SERVER['PHP_AUTH_PW']);
+
+if ( isset($_SERVER['PHP_AUTH_USER']))
+{
+    $user=$_SERVER['PHP_AUTH_USER'];
+}else{
+    $user=$_POST['user'];
+}
+
+if ( isset($_SERVER['PHP_AUTH_PW']))
+{
+    $password=$_SERVER['PHP_AUTH_PW'];
+}else{
+    $password=$_POST['password'];
+}
+
+
 $hostname=$_GET['hostname'];
 $lastUpdate=date("D M j G:i:s  Y");
 $ip=$_SERVER['REMOTE_ADDR'];
 
 //Only debug
-/*
-echo "<p>hostname: {$hostname}</p>\n";
-echo "<p>user: {$user} </p>";
-echo "<p>password in chiaro: {$password_clear} </p>";
-echo "<p>password cifrata : {$password} </p>";
-echo "<p>LastUpdate: {$lastUpdate} </p>";
-*/
+
+# echo "<p>hostname: {$hostname}</p>\n";
+# echo "<p>user: {$user} </p>";
+# echo "<p>password in chiaro: {$password_clear} </p>";
+# echo "<p>password cifrata : {$password} </p>";
+# echo "<p>LastUpdate: {$lastUpdate} </p>";
 
 
 
@@ -23,7 +36,6 @@ $mydb->connect();
 $sql="select *  from hosts where user = '$user' and password = '$password' and hostname='$hostname' ;" ;
 $mydb->execute($sql) ;
 $lastIP=$mydb->read(1,'ip');
-
 
 if($mydb->nrows()<1) 
 {
